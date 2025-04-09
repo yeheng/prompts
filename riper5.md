@@ -1,8 +1,3 @@
----
-description: 
-globs: 
-alwaysApply: true
----
 # RIPER-5 + MULTIDIMENSIONAL THINKING + AGENT EXECUTION PROTOCOL
 
 ## Table of Contents
