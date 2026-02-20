@@ -1,0 +1,39 @@
+name: Sync Homebrew API JSON
+
+on:
+  workflow_dispatch:  # 手动触发
+  schedule:
+    - cron: '0 0 * * *'  # 每天 UTC 00:00 自动运行
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/download-and-release.yml'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download cask.jws.json
+        run: |
+          curl -L -o cask.jws.json "https://formulae.brew.sh/api/cask.jws.json"
+          echo "Downloaded cask.jws.json size: $(wc -c < cask.jws.json) bytes"
+
+      - name: Download formula.jws.json
+        run: |
+          curl -L -o formula.jws.json "https://formulae.brew.sh/api/formula.jws.json"
+          echo "Downloaded formula.jws.json size: $(wc -c < formula.jws.json) bytes"
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cask.jws.json formula.jws.json
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: update homebrew api json files"
+          git push
