@@ -29,6 +29,11 @@ jobs:
         run: |
           curl -L -o formula.jws.json "https://formulae.brew.sh/api/formula.jws.json"
           echo "Downloaded formula.jws.json size: $(wc -c < formula.jws.json) bytes"
+          
+      - name: Download formula.jws.json
+        run: |
+          curl -L -o formula.jws.json "https://formulae.brew.sh/api/internal/packages.arm64_tahoe.jws.json"
+          echo "Downloaded formula.jws.json size: $(wc -c < packages.arm64_tahoe.jws.json) bytes"
 
       - name: Commit and push changes
         run: |
