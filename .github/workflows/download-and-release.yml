@@ -30,7 +30,7 @@ jobs:
           curl -L -o formula.jws.json "https://formulae.brew.sh/api/formula.jws.json"
           echo "Downloaded formula.jws.json size: $(wc -c < formula.jws.json) bytes"
           
-      - name: Download formula.jws.json
+      - name: Download packages.arm64_tahoe.jws.json
         run: |
           curl -L -o packages.arm64_tahoe.jws.json "https://formulae.brew.sh/api/internal/packages.arm64_tahoe.jws.json"
           echo "Downloaded packages.arm64_tahoe.jws.json size: $(wc -c < packages.arm64_tahoe.jws.json) bytes"
@@ -39,6 +39,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add cask.jws.json formula.jws.json
+          git add cask.jws.json formula.jws.json packages.arm64_tahoe.jws.json
           git diff --quiet && git diff --staged --quiet || git commit -m "chore: update homebrew api json files"
           git push
