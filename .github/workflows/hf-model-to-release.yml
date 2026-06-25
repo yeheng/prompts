@@ -43,7 +43,7 @@ permissions:
 
 env:
   HF_HOME: ${{ github.workspace }}/hf_cache
-  HF_HUB_ENABLE_HF_TRANSFER: "1"
+  HF_XET_HIGH_PERFORMANCE: "1"
 
 jobs:
   download-and-release:
@@ -58,18 +58,17 @@ jobs:
           python-version: "3.11"
 
       - name: Install huggingface_hub
-        run: pip install -U "huggingface_hub[cli]" hf_transfer
+        run: pip install -U "huggingface_hub[cli]"
 
       - name: Download model
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           echo "::group::Downloading ${{ inputs.model_id }} @ ${{ inputs.revision }}"
-          huggingface-cli download "${{ inputs.model_id }}" \
+          hf download "${{ inputs.model_id }}" \
             --revision "${{ inputs.revision }}" \
             --include "${{ inputs.file_pattern }}" \
-            --local-dir ./model \
-            --local-dir-use-symlinks False
+            --local-dir ./model
           echo "::endgroup::"
 
       - name: Verify download
