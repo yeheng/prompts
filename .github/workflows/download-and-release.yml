@@ -72,17 +72,21 @@ jobs:
             --notes "Auto-generated Homebrew API JSON snapshot." \
             --latest
 
-      - name: Publish rewritten ini to `cdn` branch (jsDelivr CDN)
+      - name: Commit rewritten ini to main (served by jsDelivr @main)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # jsDelivr 只能服务【仓库里的文件】，不能服务 release 资源。
-          # 所以把改写后的 ini 单独提交到孤儿分支，强推到 cdn —— main 历史保持干净。
-          git checkout --quiet --orphan cdn-tmp
-          git reset --quiet
-          git add -- ACL4SSR_Online_Full.ini
-          git commit --quiet -m "chore: update ACL4SSR_Online_Full.ini"
-          git push --force --quiet origin HEAD:cdn
-          # 刷新 jsDelivr 缓存，确保最新内容即时生效（否则可能延迟数小时）
-          curl -fsSL "https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@cdn/ACL4SSR_Online_Full.ini" >/dev/null \
-            && echo "jsDelivr cache purged" || echo "purge skipped (non-fatal)"
+          # jsDelivr 只能服务【仓库里的文件】，且对默认分支 main 解析最稳定可靠
+          # （非默认分支 @cdn 实测无法稳定解析）。把改写后的 ini 提交到 main：
+          # 仅当内容变化时提交，ACL4SSR 上游改动很少 → 提交稀疏，不会每小时刷屏。
+          git add ACL4SSR_Online_Full.ini
+          if git diff --quiet --cached; then
+            echo "ACL4SSR_Online_Full.ini 未变化，跳过提交"
+          else
+            git commit -m "chore: update ACL4SSR_Online_Full.ini"
+            git push --quiet
+            echo "已提交并推送到 main"
+          fi
+          # 刷新 jsDelivr 缓存，确保 @main 上最新内容即时生效
+          curl -fsSL "https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@main/ACL4SSR_Online_Full.ini" >/dev/null \
+            && echo "jsDelivr 缓存已刷新 (@main)" || echo "purge 跳过 (non-fatal)"
