@@ -17,6 +17,9 @@ jobs:
       contents: write
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Download cask.jws.json
         run: |
           curl -L -o cask.jws.json "https://formulae.brew.sh/api/cask.jws.json"
