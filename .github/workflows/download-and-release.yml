@@ -35,6 +35,25 @@ jobs:
           curl -L -o packages.arm64_tahoe.jws.json "https://formulae.brew.sh/api/internal/packages.arm64_tahoe.jws.json"
           echo "Downloaded packages.arm64_tahoe.jws.json size: $(wc -c < packages.arm64_tahoe.jws.json) bytes"
 
+      - name: Download ACL4SSR_Online_Full.ini & rewrite ruleset URLs to jsDelivr CDN
+        run: |
+          # 1) 下载源文件（jsDelivr CDN 优先，raw 回退）
+          URL_CDN="https://cdn.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/config/ACL4SSR_Online_Full.ini"
+          URL_RAW="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini"
+          if curl -fsSL -o ACL4SSR_Online_Full.ini "$URL_CDN"; then
+            echo "Downloaded via jsDelivr CDN"
+          else
+            echo "jsDelivr failed, falling back to raw.githubusercontent.com"
+            curl -fsSL -o ACL4SSR_Online_Full.ini "$URL_RAW"
+          fi
+          # 2) 把文件内 ruleset 链接从 raw 改写为 jsDelivr CDN（客户端拉规则走加速）
+          #    raw.githubusercontent.com/USER/REPO/BRANCH/PATH -> cdn.jsdelivr.net/gh/USER/REPO@BRANCH/PATH
+          #    注：perl 替换里 @ 必须写成 \@，否则 @$3 会被当成数组解引用
+          perl -i -pe 's|raw\.githubusercontent\.com/([^/]+)/([^/]+)/([^/]+)/|cdn.jsdelivr.net/gh/$1/$2\@$3/|g' ACL4SSR_Online_Full.ini
+          echo "Processed ACL4SSR_Online_Full.ini size: $(wc -c < ACL4SSR_Online_Full.ini) bytes"
+          echo "--- remaining raw URLs (should be none) ---"
+          grep -n 'raw.githubusercontent.com' ACL4SSR_Online_Full.ini || echo "none"
+
       - name: Delete previous latest release
         continue-on-error: true  # 首次运行时还没有 release
         env:
@@ -49,6 +68,7 @@ jobs:
             cask.jws.json \
             formula.jws.json \
             packages.arm64_tahoe.jws.json \
+            ACL4SSR_Online_Full.ini \
             --title "Homebrew API JSON" \
             --notes "Auto-generated Homebrew API JSON snapshot." \
             --latest
