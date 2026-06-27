@@ -17,9 +17,6 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Download cask.jws.json
         run: |
           curl -L -o cask.jws.json "https://formulae.brew.sh/api/cask.jws.json"
@@ -35,10 +32,20 @@ jobs:
           curl -L -o packages.arm64_tahoe.jws.json "https://formulae.brew.sh/api/internal/packages.arm64_tahoe.jws.json"
           echo "Downloaded packages.arm64_tahoe.jws.json size: $(wc -c < packages.arm64_tahoe.jws.json) bytes"
 
-      - name: Commit and push changes
+      - name: Delete previous latest release
+        continue-on-error: true  # 首次运行时还没有 release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release delete latest --cleanup-tag --yes
+
+      - name: Upload files to GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add cask.jws.json formula.jws.json packages.arm64_tahoe.jws.json
-          git diff --quiet && git diff --staged --quiet || git commit -m "chore: update homebrew api json files"
-          git push
+          gh release create latest \
+            cask.jws.json \
+            formula.jws.json \
+            packages.arm64_tahoe.jws.json \
+            --title "Homebrew API JSON" \
+            --notes "Auto-generated Homebrew API JSON snapshot." \
+            --latest
