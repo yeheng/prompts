@@ -1,0 +1,32 @@
+{
+  "skill_name": "impy",
+  "evals": [
+    {
+      "id": "guarded",
+      "prompt": "Review the change for actionable bugs. Read callers as needed. Do not modify files.",
+      "expected_output": "No defect: the only caller guards empty inputs; helper behavior is unchanged.",
+      "files": [
+        "evals/files/guarded/base.py",
+        "evals/files/guarded/head.py"
+      ]
+    },
+    {
+      "id": "boundary",
+      "prompt": "Review the change for actionable bugs. Do not modify files.",
+      "expected_output": "New defect: count=0 raises ZeroDivisionError; negative counts now return 0.",
+      "files": [
+        "evals/files/boundary/base.py",
+        "evals/files/boundary/head.py"
+      ]
+    },
+    {
+      "id": "preexisting",
+      "prompt": "Review this change for actionable bugs introduced by it. Do not modify files.",
+      "expected_output": "Empty-input division is pre-existing, not introduced; label text is the only change.",
+      "files": [
+        "evals/files/preexisting/base.py",
+        "evals/files/preexisting/head.py"
+      ]
+    }
+  ]
+}

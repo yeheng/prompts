@@ -1,0 +1,1 @@
+No actionable introduced bugs. The change only updates label text to Mean. average([]) already raises ZeroDivisionError in base.py and is not introduced by this change. Checked both functions; no runtime tests run.

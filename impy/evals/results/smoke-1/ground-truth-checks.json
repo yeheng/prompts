@@ -1,0 +1,5 @@
+{
+  "guarded": "display unchanged for empty, singleton, multiple items",
+  "boundary": "confirmed new ZeroDivisionError for count=0",
+  "preexisting": "empty average fails in both versions"
+}

@@ -1,0 +1,1 @@
+[P1] Restore the zero-count guard — head.py:2. Calling discount(100, 0) previously returned 0 and now raises ZeroDivisionError because count < 0 excludes zero. Preserve the zero case (and decide separately whether negative counts should change). Checked before/after behavior with direct calls.
