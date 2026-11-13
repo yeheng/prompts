@@ -1,0 +1,41 @@
+{
+  "workflow_id": "example-review",
+  "goal": "Review the requested change without modifying target files",
+  "workspace": "/absolute/path/to/project",
+  "status": "running",
+  "created_at": "2026-11-13T00:00:00Z",
+  "updated_at": "2026-11-13T00:00:00Z",
+  "baseline": [
+    "base: abc123; head: def456; local edits: none"
+  ],
+  "constraints": [
+    "Read-only review; store checkpoints outside the target repository"
+  ],
+  "next_action": "Inspect callers and collect evidence",
+  "todos": [
+    {
+      "id": "todo-1",
+      "action": "Inspect changed function and callers",
+      "status": "running",
+      "acceptance": "Baseline and caller constraints confirmed",
+      "updated_at": "2026-11-13T00:00:00Z",
+      "note": null
+    },
+    {
+      "id": "todo-2",
+      "action": "Verify candidate findings",
+      "status": "pending",
+      "acceptance": "Reachable triggers and counterevidence checked",
+      "updated_at": "2026-11-13T00:00:00Z",
+      "note": null
+    },
+    {
+      "id": "todo-3",
+      "action": "Report review results",
+      "status": "pending",
+      "acceptance": "Findings include evidence and coverage limits",
+      "updated_at": "2026-11-13T00:00:00Z",
+      "note": null
+    }
+  ]
+}
