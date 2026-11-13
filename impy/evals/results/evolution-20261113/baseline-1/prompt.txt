@@ -1,0 +1,1 @@
+乐子，帮我 review fixture.py 的金额折扣处理。只审查，不要改代码或补测试。找真实问题，给出触发输入和最小修复方向。临时 checkpoint 可写在本 trial 目录里；除此之外保持 review 目标不变。

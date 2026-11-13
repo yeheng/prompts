@@ -1,0 +1,54 @@
+[
+  {
+    "trial": "baseline-1",
+    "validation_exit": 0,
+    "validation_output": "Valid checkpoint\n",
+    "fixture_sha256": "9287b8146e702dd9a52037027f964f6856e832e6a5d53e543f49f54823fb669d",
+    "unchanged": true,
+    "duration_raw": "start=2026-11-13T02:58:51+00:00\nend=2026-11-13T02:59:36.844062+00:00\nseconds=45.844062\n",
+    "tokens": null,
+    "checkpoint_status": "completed",
+    "findings_float": true,
+    "findings_nan": true,
+    "chinese": true
+  },
+  {
+    "trial": "baseline-2",
+    "validation_exit": 0,
+    "validation_output": "Valid checkpoint\n",
+    "fixture_sha256": "9287b8146e702dd9a52037027f964f6856e832e6a5d53e543f49f54823fb669d",
+    "unchanged": true,
+    "duration_raw": "63\n",
+    "tokens": null,
+    "checkpoint_status": "completed",
+    "findings_float": true,
+    "findings_nan": true,
+    "chinese": true
+  },
+  {
+    "trial": "current-1",
+    "validation_exit": 0,
+    "validation_output": "Valid checkpoint\n",
+    "fixture_sha256": "9287b8146e702dd9a52037027f964f6856e832e6a5d53e543f49f54823fb669d",
+    "unchanged": true,
+    "duration_raw": "31.257404\n",
+    "tokens": null,
+    "checkpoint_status": "completed",
+    "findings_float": true,
+    "findings_nan": true,
+    "chinese": true
+  },
+  {
+    "trial": "current-2",
+    "validation_exit": 0,
+    "validation_output": "Valid checkpoint\n",
+    "fixture_sha256": "9287b8146e702dd9a52037027f964f6856e832e6a5d53e543f49f54823fb669d",
+    "unchanged": true,
+    "duration_raw": "45.76",
+    "tokens": null,
+    "checkpoint_status": "completed",
+    "findings_float": false,
+    "findings_nan": true,
+    "chinese": true
+  }
+]

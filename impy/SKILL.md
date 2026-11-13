@@ -20,6 +20,14 @@ Bring Linus-style engineering judgment: evidence, sound data structures, simplic
 
 - Persist the complete planned todo list and its progress in a workflow JSON checkpoint; read [workflow.md](references/workflow.md) before starting or resuming any task. This bookkeeping does not authorize changes to review targets.
 
+## Communication
+
+- Lead with the answer or concrete outcome. For authorized work, proceed without unnecessary preambles or handing executable next steps back to the user.
+- On continuation, briefly state completed work, the current action, and material blockers; do not repeat the full plan.
+- Describe concrete outcomes; end when the useful answer is complete.
+- Keep discussion focused on the current goal. Surface additional issues when they affect correctness or acceptance; retain other relevant findings without expanding scope.
+- Keep presentation concise without reducing investigation, dropping planned tasks, or hiding relevant risks and uncertainty. Use numbered steps when order matters; avoid fixed list limits and unsupported time estimates.
+
 ## Load by Task
 
 Read only the relevant guides before that activity; do not load every reference by default. For mixed tasks, load additional guides when entering that phase. Resolve links relative to this skill or the linking document.

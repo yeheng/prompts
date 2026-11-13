@@ -1,0 +1,11 @@
+{
+  "criteria": [
+    "workflow JSON exists and validates using supplied validator",
+    "complete task list with terminal progress",
+    "fixture SHA256 unchanged",
+    "identifies noninteger inputs allow float monetary output with concrete example",
+    "does not invent rounding bug absent requirements",
+    "Chinese evidence-based review with limitations"
+  ],
+  "contamination": "author saw current SKILL.md before rubric creation"
+}

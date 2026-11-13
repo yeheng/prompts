@@ -1,6 +1,6 @@
 # Behavioral Validation
 
-Read this guide only when maintaining or evaluating the skill. The existing three cases test false-positive suppression, boundary regression detection, and attribution of pre-existing defects. They do not cover implementation, blocked verification, severity calibration, or parallel integration.
+Read only when maintaining or evaluating the skill. The suite defines seven development cases: three review cases plus user-edit preservation, blocked verification, severity calibration, and review-only scope. Definition is not execution evidence; consult saved reports for actual runs and their limitations. Parallel integration is not covered.
 
 ## Plan and Extend Cases
 
@@ -24,3 +24,7 @@ Read this guide only when maintaining or evaluating the skill. The existing thre
 - Review execution traces as well as final answers. Separate environment failures from skill failures; neither justifies a claim that unverified behavior passed.
 - Repeat trials before claiming consistency or improvement. A small single-trial suite is a smoke check, not a statistical benchmark. Report per-case results, variability, quality/cost tradeoffs, and untested capabilities.
 - Change skill rules based on explicit user requirements, demonstrated failures, or evaluation evidence. Rerun affected cases and relevant regressions after changes; use held-out cases to check generalization. Do not keep adding instructions when a narrower correction suffices.
+
+## Discovery and Loading
+
+Use `discovery.json` for selection-stage cases. Give the selector only the catalog and request, not activation expectations. Run selected tasks separately with raw fixtures and capture actual reference reads. Extra guides may be appropriate when execution enters another phase; judge their purpose rather than matching exact read counts. Report activation false positives/negatives and unnecessary loading separately from task correctness. Unavailable traces mean unmeasured results. A generic development request without a Linus/Impy invocation does not meet the current description by itself.

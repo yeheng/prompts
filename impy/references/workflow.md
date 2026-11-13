@@ -20,6 +20,6 @@ Write UTF-8 JSON to a sibling temporary file and atomically replace the checkpoi
 
 If the path is unknown, run `python3 <skill-root>/scripts/workflow.py find <workspace>` to search both default locations, including completed checkpoints. With multiple candidates, confirm the intended task instead of choosing blindly. For a custom or temporary location, the user must retain its path.
 
-Load the checkpoint first and confirm the task, workspace, and current authorization. Recheck relevant files, baseline, and effects before resuming: a saved running todo does not prove its last operation succeeded or failed. Never blindly repeat side effects. Continue the first unresolved required todo, updating the plan if facts changed.
+Load the checkpoint first and confirm the task, workspace, and current authorization. Recheck relevant files, baseline, and effects before resuming: a saved running todo does not prove its last operation succeeded or failed. Never blindly repeat side effects. If contradictions, repeated investigation, or forgotten constraints appear during execution, reread the current request, checkpoint, and relevant files before further changes; reconcile discrepancies against current evidence. Continue the first unresolved required todo, updating the plan if facts changed.
 
 Before reporting, save actual progress, concise verification results, and the next action or explicit completion. Include the checkpoint path in the final response. Blocked work remains incomplete; the checkpoint does not replace tests or grant authorization.

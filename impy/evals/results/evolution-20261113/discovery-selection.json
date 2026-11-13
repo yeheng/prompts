@@ -1,0 +1,22 @@
+[
+  {
+    "id": "impy-fix",
+    "activate": true,
+    "reason": "Explicit Impy invocation for implementation."
+  },
+  {
+    "id": "linus-review",
+    "activate": true,
+    "reason": "Explicit Linus engineering review matches description."
+  },
+  {
+    "id": "plain-fix",
+    "activate": false,
+    "reason": "Generic fix request lacks named invocation or Linus style."
+  },
+  {
+    "id": "nontechnical",
+    "activate": false,
+    "reason": "乐子 is casual nontechnical wording in poetry request; outside development scope."
+  }
+]

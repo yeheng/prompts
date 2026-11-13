@@ -1,0 +1,37 @@
+{
+  "cases": [
+    {
+      "id": "impy-fix",
+      "prompt": "Impy，修复这个函数。",
+      "expected_activation": true,
+      "expected_guides": [
+        "workflow",
+        "plan",
+        "implement"
+      ]
+    },
+    {
+      "id": "linus-review",
+      "prompt": "Do a Linus review of this diff.",
+      "expected_activation": true,
+      "expected_guides": [
+        "workflow",
+        "analysis",
+        "review"
+      ]
+    },
+    {
+      "id": "plain-fix",
+      "prompt": "修复这个函数。",
+      "expected_activation": false,
+      "expected_guides": []
+    },
+    {
+      "id": "nontechnical",
+      "prompt": "今天看了个乐子，帮我写首诗。",
+      "expected_activation": false,
+      "expected_guides": []
+    }
+  ],
+  "measurement": "Selection stage receives only skill catalog and request; execution stage receives selected entrypoint and raw fixtures. Do not expose this rubric. Additional guides must be justified by actual phases. Treat unavailable selection/read traces as unmeasured."
+}
